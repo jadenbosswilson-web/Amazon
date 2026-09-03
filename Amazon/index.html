@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  KITCHEN PICKS — Amazon Associates affiliate storefront
+  ============================================================================
+  HOW TO SET THIS UP:
+
+  1. Your affiliate tag (findery00-20) is already wired in below as
+     AFFILIATE_TAG — every product link on the page uses it. If you ever
+     need to change it, search this file for "AFFILIATE_TAG".
+
+  2. Every product also has a `searchTerm`. Right now links point to an
+     Amazon SEARCH results page for that term (with your tag attached) —
+     this always works even if a specific listing goes out of stock or
+     changes its product ID. For a small conversion boost later, log into
+     Amazon, install the free "SiteStripe" toolbar (it appears automatically
+     at the top of amazon.com once you're an approved Associate), open each
+     product's real page, click "Get Link" > "Text", and paste that exact
+     URL into the `directLink` field for that product instead.
+
+  3. Prices/ratings below were accurate as of early Sept 2026 research —
+     Amazon changes these constantly, so re-check before you publish, and
+     plan to refresh them every month or two.
+
+  4. The yellow disclosure banner (top and footer) is REQUIRED by both the
+     FTC and Amazon's Associates Operating Agreement any time you link to
+     Amazon products for commission. Don't remove it.
+
+  5. This is a static file — upload it to your own domain's hosting as-is,
+     no build step or server needed.
+  ============================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kitchen Picks — Amazon Kitchen Gadgets We Love</title>
+<style>
+  :root{
+    --bg:#fdfaf4;
+    --paper:#ffffff;
+    --ink:#2b241b;
+    --ink-soft:#6b6152;
+    --accent:#c1592b;
+    --accent-dark:#9c4520;
+    --accent-soft:#f4e4d4;
+    --line:#e9e0d0;
+    --star:#e0a527;
+    --disclosure-bg:#fff6e0;
+    --disclosure-border:#e8cf8a;
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#1b1712;
+      --paper:#252017;
+      --ink:#f3ede1;
+      --ink-soft:#b8ac97;
+      --accent:#e08a56;
+      --accent-dark:#f0a978;
+      --accent-soft:#3a2c1c;
+      --line:#3a3226;
+      --star:#e8b94a;
+      --disclosure-bg:#2e2712;
+      --disclosure-border:#5c4d24;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5;
+  }
+  a{color:inherit;}
+  .disclosure{
+    background:var(--disclosure-bg);
+    border-bottom:1px solid var(--disclosure-border);
+    color:var(--ink);
+    font-size:13px;
+    text-align:center;
+    padding:8px 16px;
+  }
+  .topnav{
+    max-width:1100px;
+    margin:0 auto;
+    padding:22px 24px 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .topnav .brand{
+    font-weight:800;
+    font-size:18px;
+    text-decoration:none;
+    color:var(--ink);
+  }
+  .topnav .links a{
+    margin-left:18px;
+    font-size:14px;
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+  .topnav .links a:hover{color:var(--accent);}
+  header{
+    max-width:1100px;
+    margin:0 auto;
+    padding:32px 24px 24px;
+    text-align:center;
+  }
+  header .kicker{
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-size:12px;
+    font-weight:700;
+    color:var(--accent);
+  }
+  header h1{
+    font-size:clamp(28px,5vw,44px);
+    margin:10px 0 8px;
+    letter-spacing:-0.02em;
+  }
+  header p{
+    color:var(--ink-soft);
+    max-width:560px;
+    margin:0 auto;
+    font-size:16px;
+  }
+  nav.filters{
+    max-width:1100px;
+    margin:28px auto 0;
+    padding:0 24px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  nav.filters button{
+    border:1px solid var(--line);
+    background:var(--paper);
+    color:var(--ink);
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:14px;
+    cursor:pointer;
+    transition:background .15s, color .15s, border-color .15s;
+  }
+  nav.filters button:hover{border-color:var(--accent);}
+  nav.filters button.active{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
+  }
+  main{
+    max-width:1100px;
+    margin:0 auto;
+    padding:36px 24px 60px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:20px;
+  }
+  .card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .card .thumb{
+    height:150px;
+    border-radius:10px;
+    background:var(--accent-soft);
+    overflow:hidden;
+  }
+  .card .thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .card .cat-tag{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--accent);
+    font-weight:700;
+  }
+  .card h3{
+    margin:0;
+    font-size:16px;
+    line-height:1.3;
+  }
+  .card .blurb{
+    color:var(--ink-soft);
+    font-size:13.5px;
+    flex-grow:1;
+  }
+  .card .meta{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .card .stars{color:var(--star);}
+  .card .price{
+    font-weight:700;
+    font-size:15px;
+    color:var(--ink);
+  }
+  .card .cta{
+    display:block;
+    text-align:center;
+    background:var(--accent);
+    color:#fff;
+    text-decoration:none;
+    padding:10px 14px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    margin-top:4px;
+  }
+  .card .cta:hover{background:var(--accent-dark);}
+  footer{
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 24px 48px;
+    color:var(--ink-soft);
+    font-size:12.5px;
+    text-align:center;
+  }
+  footer .credits{
+    text-align:left;
+    margin-top:14px;
+    font-size:11.5px;
+    color:var(--ink-soft);
+  }
+  footer .credits summary{
+    cursor:pointer;
+    font-weight:600;
+    text-align:center;
+  }
+  footer .credits ul{
+    margin:10px 0 0;
+    padding-left:18px;
+  }
+  footer .credits li{margin-bottom:4px;}
+  footer .credits a{color:var(--ink-soft);text-decoration:underline;}
+  footer .disclosure-full{
+    background:var(--disclosure-bg);
+    border:1px solid var(--disclosure-border);
+    border-radius:10px;
+    padding:16px;
+    text-align:left;
+    margin-bottom:16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="disclosure">
+  As an Amazon Associate, this site earns from qualifying purchases.
+</div>
+
+<div class="topnav">
+  <a class="brand" href="index.html">Kitchen Picks</a>
+  <div class="links">
+    <a href="index.html">Shop</a>
+    <a href="blog/index.html">Blog</a>
+  </div>
+</div>
+
+<header>
+  <div class="kicker">Curated Picks</div>
+  <h1>Kitchen Picks</h1>
+  <p>The kitchen gadgets, tools, and small upgrades that are actually worth buying — hand-picked from what real reviewers keep coming back to.</p>
+</header>
+
+<nav class="filters" id="filters"></nav>
+
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  <div class="disclosure-full">
+    <strong>Affiliate disclosure:</strong> Kitchen Picks is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com. As an Amazon Associate, this site earns from qualifying purchases at no extra cost to you.
+  </div>
+  <div>Prices and ratings shown are approximate and set by Amazon at time of purchase — always check the current price on Amazon before buying. © <span id="year"></span> Kitchen Picks.</div>
+  <details class="credits">
+    <summary>Photo credits</summary>
+    <p>Product photos are representative stock images from Wikimedia Commons, used under their listed open licenses (not official Amazon product photography). Once you're an approved Associate, swap these for the exact listing photos via Amazon's SiteStripe tool.</p>
+    <ul>
+      <li>Vegetable chopper: <a href="https://commons.wikimedia.org/wiki/File:Zyliss_vegetable_chopper.jpg" target="_blank" rel="noopener">"Zyliss vegetable chopper"</a> by Joar, CC BY-SA 2.0</li>
+      <li>Kitchen scale: <a href="https://commons.wikimedia.org/wiki/File:Escali_digital_kitchen_scale.jpg" target="_blank" rel="noopener">"Escali digital kitchen scale"</a> by Ser Amantio di Nicolao, CC BY-SA 4.0</li>
+      <li>Meat thermometer: <a href="https://commons.wikimedia.org/wiki/File:%D0%9A%D1%83%D0%BB%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%B9_%D1%82%D0%B5%D1%80%D0%BC%D0%BE%D0%BC%D0%B5%D1%82%D1%80.jpg" target="_blank" rel="noopener">"Кулинарный термометр"</a> by Pannet, CC BY-SA 4.0</li>
+      <li>Knife sharpener: <a href="https://commons.wikimedia.org/wiki/File:Knife_Sharpener,_W%C3%BCsthof,_2008-ret.jpg" target="_blank" rel="noopener">"Knife Sharpener, Wüsthof"</a> by Paul Martin / Zinnmann, CC BY 2.0</li>
+      <li>Food storage containers: <a href="https://commons.wikimedia.org/wiki/File:Tupperware_Ultraplus.JPG" target="_blank" rel="noopener">"Tupperware Ultraplus"</a> by Fiertel91, CC BY 3.0</li>
+      <li>Silicone bags: <a href="https://commons.wikimedia.org/wiki/File:Ziplock.jpg" target="_blank" rel="noopener">"Ziplock"</a> by Mattes, Public Domain</li>
+      <li>Silicone baking cups: <a href="https://commons.wikimedia.org/wiki/File:Silcone_muffin_cups.JPG" target="_blank" rel="noopener">"Silcone muffin cups"</a> by Tem5psu, CC BY-SA 4.0</li>
+      <li>Coffee maker: <a href="https://commons.wikimedia.org/wiki/File:Keurig_K-Elite_Coffee_Maker.jpg" target="_blank" rel="noopener">"Keurig K-Elite Coffee Maker"</a> by TaurusEmerald, CC BY-SA 4.0</li>
+      <li>Milk frother: <a href="https://commons.wikimedia.org/wiki/File:Milk_frother_wand_battery_powered.jpg" target="_blank" rel="noopener">"Milk frother wand battery powered"</a> by Ll1324, CC0</li>
+      <li>Egg cooker: <a href="https://commons.wikimedia.org/wiki/File:Bosch_egg_boiler.jpg" target="_blank" rel="noopener">"Bosch egg boiler"</a> by Espen Klem, CC BY 2.0</li>
+      <li>Waffle maker: <a href="https://commons.wikimedia.org/wiki/File:Waffle_Maker.jpg" target="_blank" rel="noopener">"Waffle Maker"</a> by Donovan Govan, CC BY-SA 3.0</li>
+      <li>Cast iron skillet: <a href="https://commons.wikimedia.org/wiki/File:Griswold_cast_iron_skillet.jpg" target="_blank" rel="noopener">"Griswold cast iron skillet"</a> by NMorales (WMF), CC BY-SA 4.0</li>
+    </ul>
+  </details>
+</footer>
+
+<script>
+  // ==========================================================================
+  // 1. YOUR AFFILIATE TAG — replace this with your real Amazon Associates ID
+  // ==========================================================================
+  const AFFILIATE_TAG = "findery00-20";
+
+  // ==========================================================================
+  // 2. PRODUCT DATA — add, remove, or edit products here.
+  //    `directLink` can be left null (falls back to a tagged Amazon search
+  //    for `searchTerm`), or set to an exact SiteStripe product link.
+  // ==========================================================================
+  const PRODUCTS = [
+    { category:"Prep Tools", img:"images/vegetable-chopper.jpg", name:"Fullstar Vegetable Chopper & Slicer",
+      blurb:"One tool, eight blades — dices, slices, and juliennes in seconds. The single most-gifted item in this list.",
+      price:"$29.99", rating:4.5, reviews:"124.5K", searchTerm:"Fullstar Vegetable Chopper and Slicer", directLink:null },
+    { category:"Prep Tools", img:"images/kitchen-scale.jpg", name:"Etekcity Digital Food Kitchen Scale",
+      blurb:"Sleek, accurate, and cheap enough that everyone who cooks ends up buying one.",
+      price:"$10.99", rating:4.6, reviews:"170.7K", searchTerm:"Etekcity Digital Food Kitchen Scale", directLink:null },
+    { category:"Prep Tools", img:"images/meat-thermometer.jpg", name:"ThermoPro Digital Meat Thermometer",
+      blurb:"Instant-read, no more guessing on grill night. A classic 'why didn't I buy this sooner' item.",
+      price:"$10.99", rating:4.5, reviews:"135.4K", searchTerm:"ThermoPro Digital Meat Thermometer", directLink:null },
+    { category:"Prep Tools", img:"images/knife-sharpener.jpg", name:"KITCHELLENCE 3-Stage Knife Sharpener",
+      blurb:"Turns a drawer of dull knives sharp again in under a minute, no skill required.",
+      price:"$17.99", rating:4.5, reviews:"37.8K", searchTerm:"KITCHELLENCE 3-Stage Knife Sharpener", directLink:null },
+
+    { category:"Meal Prep & Storage", img:"images/food-storage-containers.jpg", name:"Chef's Path Airtight Food Storage Containers (14-Piece)",
+      blurb:"Leak-proof, stackable, and the reason pantries everywhere finally look organized.",
+      price:"$41.99", rating:4.7, reviews:"78.2K", searchTerm:"Chef's Path 14-Piece Airtight Food Storage Containers", directLink:null },
+    { category:"Meal Prep & Storage", img:"images/silicone-bags.jpg", name:"Stasher Silicone Reusable Food Storage Bags",
+      blurb:"Reusable, dishwasher-safe, freezer-safe — the plastic-baggie replacement people actually stick with.",
+      price:"$22.99", rating:4.6, reviews:"5.5K", searchTerm:"Stasher Silicone Reusable Food Storage Bags", directLink:null },
+    { category:"Meal Prep & Storage", img:"images/silicone-baking-cups.jpg", name:"Amazon Basics Reusable Silicone Baking Cups (12-Pack)",
+      blurb:"A tiny, cheap swap that quietly eliminates a whole category of disposable baking cups.",
+      price:"$7.59", rating:4.7, reviews:"98.1K", searchTerm:"Amazon Basics Reusable Silicone Baking Cups", directLink:null },
+
+    { category:"Coffee & Breakfast", img:"images/keurig-coffee-maker.jpg", name:"Keurig K-Classic Single-Serve Coffeemaker",
+      blurb:"The single-serve coffee maker most people already know and trust — an easy 'yes' purchase.",
+      price:"$119.99", rating:4.5, reviews:"108.5K", searchTerm:"Keurig K-Classic Single Serve Coffee Maker", directLink:null },
+    { category:"Coffee & Breakfast", img:"images/milk-frother.jpg", name:"Zulay Kitchen Milk Frother Wand",
+      blurb:"Cafe-style foam in 15 seconds. Cheap, tiny, and one of the highest-rated items on Amazon, period.",
+      price:"$14.99", rating:4.3, reviews:"309.9K", searchTerm:"Zulay Kitchen Milk Frother Wand", directLink:null },
+    { category:"Coffee & Breakfast", img:"images/egg-cooker.jpg", name:"DASH Rapid Egg Cooker",
+      blurb:"Perfect hard/soft-boiled eggs with zero babysitting. A dorm-room and family-kitchen staple alike.",
+      price:"$19.99", rating:4.6, reviews:"133.3K", searchTerm:"DASH Rapid Egg Cooker", directLink:null },
+    { category:"Coffee & Breakfast", img:"images/waffle-maker.jpg", name:"DASH Mini Waffle Maker",
+      blurb:"Fun, fast, and small enough to actually have counter space for — a frequent impulse-add-to-cart item.",
+      price:"$10.99", rating:4.6, reviews:"183.6K", searchTerm:"DASH Mini Waffle Maker", directLink:null },
+
+    { category:"Cooking Essentials", img:"images/cast-iron-skillet.jpg", name:"Lodge 10.25-Inch Cast-Iron Pre-Seasoned Skillet",
+      blurb:"The pan people mention when they say 'I wish I'd bought this years ago.' Lasts a lifetime.",
+      price:"$24.90", rating:4.6, reviews:"129.2K", searchTerm:"Lodge 10.25 Inch Cast Iron Skillet Pre-Seasoned", directLink:null },
+  ];
+
+  // ==========================================================================
+  // Rendering — you shouldn't need to touch anything below this line
+  // ==========================================================================
+  function amazonLink(p){
+    if (p.directLink) {
+      const sep = p.directLink.includes("?") ? "&" : "?";
+      return p.directLink.includes("tag=") ? p.directLink : `${p.directLink}${sep}tag=${AFFILIATE_TAG}`;
+    }
+    return `https://www.amazon.com/s?k=${encodeURIComponent(p.searchTerm)}&tag=${AFFILIATE_TAG}`;
+  }
+
+  function starString(rating){
+    const full = Math.round(rating);
+    return "★".repeat(full) + "☆".repeat(5 - full);
+  }
+
+  const categories = ["All", ...new Set(PRODUCTS.map(p => p.category))];
+  const filtersEl = document.getElementById("filters");
+  const gridEl = document.getElementById("grid");
+
+  function render(filter){
+    gridEl.innerHTML = PRODUCTS
+      .filter(p => filter === "All" || p.category === filter)
+      .map(p => `
+        <div class="card">
+          <div class="thumb"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
+          <div class="cat-tag">${p.category}</div>
+          <h3>${p.name}</h3>
+          <div class="blurb">${p.blurb}</div>
+          <div class="meta">
+            <span class="stars">${starString(p.rating)}</span>
+            <span>${p.reviews} ratings</span>
+          </div>
+          <div class="meta">
+            <span class="price">${p.price}</span>
+            <span>on Amazon</span>
+          </div>
+          <a class="cta" href="${amazonLink(p)}" target="_blank" rel="noopener sponsored nofollow">
+            Check Price on Amazon →
+          </a>
+        </div>
+      `).join("");
+  }
+
+  filtersEl.innerHTML = categories.map((c,i) =>
+    `<button data-cat="${c}" class="${i===0 ? 'active' : ''}">${c}</button>`
+  ).join("");
+
+  filtersEl.addEventListener("click", (e) => {
+    if (e.target.tagName !== "BUTTON") return;
+    filtersEl.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+    e.target.classList.add("active");
+    render(e.target.dataset.cat);
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+  render("All");
+</script>
+
+</body>
+</html>
