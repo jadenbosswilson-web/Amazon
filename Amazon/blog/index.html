@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | Kitchen Picks</title>
+<meta name="description" content="Buying guides, honest reviews, and kitchen tips behind the products we recommend.">
+<style>
+:root{
+  --bg:#fdfaf4; --paper:#ffffff; --ink:#2b241b; --ink-soft:#6b6152;
+  --accent:#c1592b; --accent-dark:#9c4520; --accent-soft:#f4e4d4;
+  --line:#e9e0d0; --disclosure-bg:#fff6e0; --disclosure-border:#e8cf8a;
+  --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1b1712; --paper:#252017; --ink:#f3ede1; --ink-soft:#b8ac97;
+    --accent:#e08a56; --accent-dark:#f0a978; --accent-soft:#3a2c1c;
+    --line:#3a3226; --disclosure-bg:#2e2712; --disclosure-border:#5c4d24;
+  }
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.6;}
+a{color:var(--accent);}
+.disclosure{background:var(--disclosure-bg);border-bottom:1px solid var(--disclosure-border);
+  color:var(--ink);font-size:13px;text-align:center;padding:8px 16px;}
+.topnav{max-width:800px;margin:0 auto;padding:22px 24px 0;display:flex;
+  align-items:center;justify-content:space-between;}
+.topnav .brand{font-weight:800;font-size:18px;text-decoration:none;color:var(--ink);}
+.topnav .links a{margin-left:18px;font-size:14px;text-decoration:none;color:var(--ink-soft);font-weight:600;}
+.topnav .links a:hover{color:var(--accent);}
+article{max-width:720px;margin:0 auto;padding:36px 24px 60px;}
+.kicker{text-transform:uppercase;letter-spacing:.1em;font-size:12px;font-weight:700;color:var(--accent);}
+h1.title{font-size:clamp(26px,4.5vw,38px);margin:10px 0 6px;letter-spacing:-0.02em;}
+.dek{color:var(--ink-soft);font-size:17px;margin-bottom:28px;}
+article h2{font-size:20px;margin-top:34px;}
+article p{font-size:16px;color:var(--ink);}
+.callout{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px;margin:22px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.callout .name{font-weight:700;}
+.callout .sub{color:var(--ink-soft);font-size:13.5px;}
+.callout a.cta{background:var(--accent);color:#fff;text-decoration:none;padding:9px 16px;
+  border-radius:8px;font-size:14px;font-weight:600;white-space:nowrap;}
+.callout a.cta:hover{background:var(--accent-dark);}
+.disclosure-full{background:var(--disclosure-bg);border:1px solid var(--disclosure-border);
+  border-radius:10px;padding:16px;font-size:13px;margin:36px 0 0;}
+.backlink{display:inline-block;margin-top:30px;font-size:14px;font-weight:600;}
+footer{max-width:800px;margin:0 auto;padding:0 24px 48px;color:var(--ink-soft);font-size:12.5px;text-align:center;}
+
+.postgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;max-width:900px;margin:0 auto;padding:0 24px 60px;}
+.postcard{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-decoration:none;color:var(--ink);display:block;}
+.postcard h3{margin:8px 0 8px;font-size:17px;}
+.postcard p{margin:0;color:var(--ink-soft);font-size:14px;}
+.postcard:hover{border-color:var(--accent);}
+.blogheader{max-width:900px;margin:0 auto;padding:30px 24px 10px;text-align:center;}
+.blogheader h1{font-size:clamp(26px,4.5vw,38px);margin:8px 0;}
+.blogheader p{color:var(--ink-soft);max-width:520px;margin:0 auto;}
+</style>
+</head>
+<body>
+<div class="disclosure">As an Amazon Associate, this site earns from qualifying purchases.</div>
+<div class="topnav">
+  <a class="brand" href="../index.html">Kitchen Picks</a>
+  <div class="links">
+    <a href="../index.html">Shop</a>
+    <a href="index.html">Blog</a>
+  </div>
+</div>
+<div class="blogheader">
+  <div class="kicker">The Kitchen Picks Blog</div>
+  <h1>Guides, reviews, and honest takes</h1>
+  <p>The thinking behind what we recommend — what's actually worth buying, and why.</p>
+</div>
+<div class="postgrid">
+<a class="postcard" href="kitchen-gadgets-worth-buying-2026.html">
+  <div class="kicker">Article</div>
+  <h3>5 Kitchen Gadgets Actually Worth Buying in 2026</h3>
+  <p>Most single-use gadgets end up in a drawer within a month. These didn&#x27;t — here&#x27;s the actual test we use before recommending anything.</p>
+</a><a class="postcard" href="fullstar-chopper-review.html">
+  <div class="kicker">Article</div>
+  <h3>Fullstar Vegetable Chopper: Is the 8-Blade Hype Real?</h3>
+  <p>It shows up on every &#x27;kitchen finds&#x27; list on the internet. We looked at what it&#x27;s actually good at, and where it falls short.</p>
+</a><a class="postcard" href="kitchen-gifts-under-30.html">
+  <div class="kicker">Article</div>
+  <h3>8 Kitchen Gifts Under $30 That Don&#x27;t Feel Cheap</h3>
+  <p>The trick to a good kitchen gift isn&#x27;t spending more — it&#x27;s picking something the person will actually reach for.</p>
+</a><a class="postcard" href="cast-iron-101.html">
+  <div class="kicker">Article</div>
+  <h3>Cast Iron 101: Why a $25 Pan Outlasts Your Nonstick Set</h3>
+  <p>Cast iron has a reputation for being fussy. Most of that reputation is outdated — here&#x27;s what actually matters.</p>
+</a><a class="postcard" href="meal-prep-storage-guide.html">
+  <div class="kicker">Article</div>
+  <h3>The Meal Prepper&#x27;s Guide to Not Wasting Food</h3>
+  <p>Most food waste isn&#x27;t a cooking problem — it&#x27;s a storage problem. A few container upgrades fix more of it than you&#x27;d expect.</p>
+</a><a class="postcard" href="home-coffee-setup.html">
+  <div class="kicker">Article</div>
+  <h3>Building a Home Coffee &amp; Latte Setup Without a Barista Budget</h3>
+  <p>You don&#x27;t need a $2,000 espresso machine to stop overpaying for coffee out. Here&#x27;s a setup that covers most of what people actually order.</p>
+</a><a class="postcard" href="kitchen-scale-why-it-matters.html">
+  <div class="kicker">Article</div>
+  <h3>Why an $11 Kitchen Scale Will Make You a Better Cook</h3>
+  <p>It&#x27;s the least exciting item you can buy for your kitchen, and also one of the few that measurably improves your cooking.</p>
+</a><a class="postcard" href="knife-sharpening-basics.html">
+  <div class="kicker">Article</div>
+  <h3>Knife Care 101: A 5-Minute Habit That Changes How You Cook</h3>
+  <p>A dull knife isn&#x27;t just annoying — it&#x27;s the more dangerous option. Here&#x27;s the difference between sharpening and honing, explained simply.</p>
+</a><a class="postcard" href="fast-breakfast-gadgets.html">
+  <div class="kicker">Article</div>
+  <h3>Breakfast in Under 10 Minutes: The Gadgets That Actually Help</h3>
+  <p>Skipping breakfast is usually a time problem, not a motivation problem. A couple of dedicated tools shrink the time cost a lot.</p>
+</a><a class="postcard" href="small-kitchen-upgrades.html">
+  <div class="kicker">Article</div>
+  <h3>Small Kitchen, Big Upgrade: Space-Saving Tools That Punch Above Their Size</h3>
+  <p>You don&#x27;t need more counter space to cook well — you need fewer single-purpose tools taking up the space you have.</p>
+</a>
+</div>
+<footer>Prices and ratings mentioned are approximate and set by Amazon at time of purchase — always check the current price on Amazon before buying. © 2026 Kitchen Picks.</footer>
+</body>
+</html>
